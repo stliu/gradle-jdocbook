@@ -21,6 +21,8 @@ public class TranslateTask extends AbstractTranslationTask {
 	@TaskAction
 	public void translate() {
 		log.lifecycle( "translating {} into {}", getLang(), resolveTranslatedXmlDirectory() );
+		long start = System.currentTimeMillis();
 		getBook().getComponentRegistry().getTranslator().translate( this );
+		log.lifecycle("task {} executation time is {}",getName(),(System.currentTimeMillis()-start)) ;
 	}
 }

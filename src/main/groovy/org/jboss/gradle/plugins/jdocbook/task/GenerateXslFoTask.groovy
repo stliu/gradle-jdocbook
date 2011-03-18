@@ -28,11 +28,12 @@ public class GenerateXslFoTask extends BookTask implements RenderingSource {
 		log.lifecycle("Generating XSL-FO file");
 		final FormatOptions pdfFormatOptions = findPdfFormatOptions();
 		log.trace("found pdf format options");
-
+		long start = System.currentTimeMillis();
 		book.componentRegistry.xslFoGenerator.generateXslFo(
 				this,
 				pdfFormatOptions
 		);
+		log.lifecycle("task {} executation time is {}",name,(System.currentTimeMillis()-start))
 	}
 
 	@OutputDirectory
