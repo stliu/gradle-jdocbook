@@ -78,7 +78,6 @@ dependencies {
     compile 'org.jboss.jdocbook:jdocbook-core:1.1.0'
     compile 'org.apache.ant:ant:1.7.0' //don't see why we need this here
 
-    groovy localGroovy()
     testCompile 'junit:junit:4.8.1'
     testCompile jmock
     testCompile spock
@@ -164,5 +163,5 @@ uploadArchives.dependsOn sourcesJar
 uploadArchives.dependsOn install
 
 task wrapper(type: Wrapper) {
-    gradleVersion = '1.1'
+    gradleVersion = '1.6'
 }

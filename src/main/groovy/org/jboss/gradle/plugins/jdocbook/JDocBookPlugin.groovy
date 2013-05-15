@@ -56,12 +56,12 @@ public class JDocBookPlugin implements Plugin<Project> {
 				.setVisible(false)
 				.setTransitive(false)
 				.setDescription( "The DocBook artifact(s) to use (deprecated, use jdocbookXsl instead)." );
-        project.configurations.add(XSL_CONFIG_NAME)
+        project.configurations.create(XSL_CONFIG_NAME)
 				.extendsFrom( deprecatedConfig )
 				.setVisible(false)
 				.setTransitive(true)
 				.setDescription( "Defines any DocBook XSL artifacts to make available to the build" );
-        project.configurations.add(STYLES_CONFIG_NAME)
+        project.configurations.create(STYLES_CONFIG_NAME)
 				.setVisible(false)
 				.setTransitive(true)
 				.setDescription("Defines any jDocBook styles artifacts to apply");

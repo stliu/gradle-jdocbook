@@ -127,7 +127,7 @@ class CreateTasksPerBookAction implements Action<Book> {
         }
         book.formats.all {FormatOption format ->
             if (!format.enable) return
-            RenderTask render = addTask(String.format("%s_%s_%s", getTaskName(CreateTasksPerBookAction.RENDER_TASK_GROUP, book.name), lang, format.name),
+            RenderTask render = addTask(String.format("%s_%s_%s", getTaskName(RENDER_TASK_GROUP, book.name), lang, format.name),
                     RenderTask)
 
             render.description = String.format("Perform %s %s formatting for language %s", getDescriptionName(book.name), format.name, lang)
@@ -137,7 +137,7 @@ class CreateTasksPerBookAction implements Action<Book> {
                 render.dependsOn translateTask
             }
             if (format.name == StandardDocBookFormatMetadata.PDF.name) {
-                String xslFoTaskName = getTaskName(CreateTasksPerBookAction.XSL_FO_TASK_GROUP, book.name)
+                String xslFoTaskName = getTaskName(XSL_FO_TASK_GROUP, book.name)
                 Task xslFoTask = getTask(xslFoTaskName)
                 if (xslFoTask == null) {
                     xslFoTask = addTask(xslFoTaskName, GenerateXslFoTask)
@@ -145,7 +145,7 @@ class CreateTasksPerBookAction implements Action<Book> {
                     xslFoTask.configure(book, lang)
                 }
             }
-            getTask(getTaskName(CreateTasksPerBookAction.RENDER_TASK_GROUP, book.name)).dependsOn render
+            getTask(getTaskName(RENDER_TASK_GROUP, book.name)).dependsOn render
         }
 
     }
@@ -155,7 +155,7 @@ class CreateTasksPerBookAction implements Action<Book> {
     }
 
     private <T extends Task> T addTask(String name, Class<T> type) {
-        project.tasks.add(name, type)
+        project.tasks.create(name, type)
     }
 
     private Task getOrCreateTask(String name, String description) {
